@@ -1,0 +1,13 @@
+C:\Users\Richard\Desktop\312 projects\TSPBranchAndBound\TSPBranchAndBound\for-distribution\TSP\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Richard\Desktop\312 projects\TSPBranchAndBound\TSPBranchAndBound\for-distribution\TSP\obj\Release\TSP.Form1.resources
+C:\Users\Richard\Desktop\312 projects\TSPBranchAndBound\TSPBranchAndBound\for-distribution\TSP\obj\Release\TSP.Properties.Resources.resources
+C:\Users\Richard\Desktop\312 projects\TSPBranchAndBound\TSPBranchAndBound\for-distribution\TSP\obj\Release\TSP.csproj.GenerateResource.Cache
+C:\Programming\School\CS312\TSP B&B\TSP\bin\Release\TSP.exe.config
+C:\Programming\School\CS312\TSP B&B\TSP\bin\Release\TSP.exe
+C:\Programming\School\CS312\TSP B&B\TSP\bin\Release\TSP.pdb
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.mainform.resources
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.Properties.Resources.resources
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.csproj.GenerateResource.Cache
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.exe
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.pdb
+C:\Programming\School\CS312\TSP B&B\TSP\obj\Release\TSP.csprojResolveAssemblyReference.cache
