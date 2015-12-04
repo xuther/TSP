@@ -31,3 +31,12 @@ C:\Programming\School\CS312\TSP B&B\TSP\obj\Debug\TSP.csprojResolveAssemblyRefer
 C:\Programming\School\CS312\TSP B&B\TSP\obj\Debug\TSP.mainform.resources
 C:\Programming\School\CS312\TSP B&B\TSP\obj\Debug\TSP.Properties.Resources.resources
 C:\Programming\School\CS312\TSP B&B\TSP\obj\Debug\TSP.csproj.GenerateResource.Cache
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\bin\Debug\TSP.exe.config
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\bin\Debug\TSP.exe
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\bin\Debug\TSP.pdb
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.csprojResolveAssemblyReference.cache
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.mainform.resources
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.Properties.Resources.resources
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.csproj.GenerateResource.Cache
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.exe
+C:\Users\bljoseph\Documents\Projects\tsp\TSP\obj\Debug\TSP.pdb

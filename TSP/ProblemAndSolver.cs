@@ -262,9 +262,12 @@ namespace TSP
             }
 
             // Draw city dots
-            foreach (City c in Cities)
+            for (int i = 0; i < Cities.Length; i++)
             {
-                g.FillEllipse(cityBrushStyle, (float)c.X * width, (float)c.Y * height, CITY_ICON_SIZE, CITY_ICON_SIZE);
+                if (bssf == null)
+                    g.DrawString(" " + i, labelFont, cityBrushStyle, new PointF((float)Cities[i].X * width + 3F, (float)Cities[i].Y * height));
+
+                g.FillEllipse(cityBrushStyle, (float)Cities[i].X * width, (float)Cities[i].Y * height, CITY_ICON_SIZE, CITY_ICON_SIZE);
             }
 
         }
@@ -340,6 +343,25 @@ namespace TSP
             toReturn.Add(current, 0);
             return toReturn;
         }
+
+        public void StartAnt()
+        {
+            AntColony colony = new AntColony(Cities);
+
+            return;
+        }
+
+        public void greedy() {
+            double bestSoFar;
+            bssf = new TSPSolution(buildSolution(findUpperBound()));
+            bestSoFar = bssf.costOfRoute();
+            // update the cost of the tour. 
+            Program.MainForm.tbCostOfTour.Text = " " + bestSoFar;
+            // do a refresh. 
+            Program.MainForm.Invalidate();
+        }
+
+
 
         /// <summary>
         ///  solve the problem.  This is the entry point for the solver when the run button is clicked

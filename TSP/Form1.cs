@@ -156,8 +156,8 @@ namespace TSP
 
         private void greedyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Add a hook into your own implementation here.
-            throw new NotImplementedException();
+            this.reset();
+            CityData.greedy();
         }
 
         private void bBToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,8 +175,7 @@ namespace TSP
 
         private void yourTSPToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            // TODO: Add a hook into your own implementation here.
-            throw new NotImplementedException();
+            CityData.StartAnt();
         }
 
         private void AlgorithmMenu2_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)

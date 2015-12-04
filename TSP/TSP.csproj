@@ -60,7 +60,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ant.cs" />
+    <Compile Include="AntColony.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="CityMatrixAnt.cs" />
     <Compile Include="CostMatrix.cs" />
     <Compile Include="HardMode.cs" />
     <Compile Include="Node.cs" />
