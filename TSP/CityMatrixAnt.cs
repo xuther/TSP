@@ -53,10 +53,14 @@ namespace TSP
                     }
 
                     costMatrix[i][j] = cur.costToGetTo(cities[j]);
+                    
+                    if (costMatrix[i][j] == 0)
+                        costMatrix[i][j] = 1;
+
                     pheremone[i][j] = initPheremone;
 
                     //Pij^Alpha * Nij^Beta where Nij = Q/dist(i,j)
-                    pheremoneByConstant[i][j] = Math.Pow(pheremone[i][j], alpha) * Math.Pow((Q / costMatrix[i][j]), beta); ;
+                    setPheromoneByConstant(i, j);
                 }        
 
             }
@@ -69,7 +73,7 @@ namespace TSP
         private void setPheromoneByConstant(int fromCity, int toCity)
         {
             double first = Math.Pow(pheremone[fromCity][toCity], alpha);
-            double second = Math.Pow((1 / costMatrix[fromCity][toCity]), beta);
+            double second = Math.Pow((Q / costMatrix[fromCity][toCity]), beta);
             double value = first * second;
 
             //Forget the fancy heruistics, see if this works. 
@@ -99,6 +103,10 @@ namespace TSP
             setPheromone(fromCity, toCity, changeAmount + getPheromone(fromCity, toCity));
         }
 
+        public void setNewPheromone(int fromCity, int toCity, double amount)
+        {
+            this.newPheromone[fromCity][toCity] = amount;
+        }
 
         public double getPheremoneByConstant(int fromCity, int toCity)
         {
@@ -115,10 +123,10 @@ namespace TSP
                 {
                     pheremone[i][j] = newPheromone[i][j] + (pheremone[i][j] * toMultiply);
                     setPheromoneByConstant(i, j);
+                    newPheromone[i][j] = 0;
                 }
 
             }
-
 
         }
 

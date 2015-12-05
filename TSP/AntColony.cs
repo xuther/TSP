@@ -22,10 +22,13 @@ namespace TSP
 
         private double Q = 100;
 
-        private readonly int EPOCH_NUM = 75;
+        private readonly int EPOCH_NUM = 200;
+        private readonly int ANT_NUM = 5;
 
         private double[] averagePath;
         private double[] lowestPath;
+        private double[] worstPath;
+
         private double bestCost;
         private int[,] bestPath;
 
@@ -36,11 +39,12 @@ namespace TSP
 
             averagePath = new double[EPOCH_NUM];
             lowestPath = new double[EPOCH_NUM];
+            worstPath = new double[EPOCH_NUM];
 
             bestCost = double.PositiveInfinity;
 
 
-            Ant[] ants = new Ant[50];
+            Ant[] ants = new Ant[ANT_NUM];
 
             //let's start with 10 epochs. 
             for(int i = 0; i < ants.Length; i++)
@@ -49,30 +53,36 @@ namespace TSP
             }
             for (int i = 0; i < EPOCH_NUM; i++) {
 
-                foreach (Ant worker in ants)
+                for (int j = 0; j < ANT_NUM; j++)
                 {
-                    worker.run(worker.startCity);
+                    ants[j].run(rand.Next(0,cities.Length-1));
                 }
-                Console.WriteLine("Iteration " + i + " average length: " + getAveragePathLength(ants));
-                Console.WriteLine("Iteration " + i + " minimum Length: " + getMinLength(ants));
+               
+                int antIndex, averageAntIndex, worstAntIndex;
 
+                Console.WriteLine("Iteration " + i + " average length: " + getAveragePathLength(ants));
+                Console.WriteLine("Iteration " + i + " minimum Length: " + getMinLength(ants,out antIndex));
+
+                
+                worstPath[i] = getWorstLength(ants, out worstAntIndex);
                 averagePath[i] = getAveragePathLength(ants);
-                lowestPath[i] = getMinLength(ants);
+                lowestPath[i] = ants[antIndex].getTourCost();
 
                 if (lowestPath[i] < bestCost)
                 {
                     bestCost = lowestPath[i];
-                    bestPath = ants[i].getPath();
+                    bestPath = ants[antIndex].getPath();
                 }
 
 
 
-                depositPheromone(ants);
+                depositPheromone(ants, worstPath[i]);
                 matrix.Evaporate();
             }
 
             System.IO.File.WriteAllText(@"Average", buildString(averagePath));
             System.IO.File.WriteAllText(@"Best", buildString(lowestPath));
+            System.IO.File.WriteAllText(@"Worst", buildString(worstPath));
 
             Console.WriteLine("Best cost: " + bestCost.ToString());
 
@@ -93,17 +103,38 @@ namespace TSP
             return toReturn;
         }
 
+        private double getWorstLength(Ant[] ants, out int worstAntIndex)
+        {
+            double curWinner = double.NegativeInfinity;
+            worstAntIndex = -1;
 
-        private double getMinLength(Ant[] ants)
+            for (int i = 0; i < ANT_NUM; i++)
+            {
+                if (ants[i].pathFound)
+                {
+                    if (ants[i].getTourCost() > curWinner)
+                    {
+                        curWinner = ants[i].getTourCost();
+                        worstAntIndex = i;
+                    }
+                }
+            }
+            return curWinner;
+        }
+
+        private double getMinLength(Ant[] ants, out int antIndex)
         {
             double curWinner = double.PositiveInfinity;
-
-            foreach (Ant a in ants)
+            antIndex = -1;
+            for (int i = 0; i < ANT_NUM; i++)
             {
-                if (a.pathFound)
+                if (ants[i].pathFound)
                 {
-                    if (a.getTourCost() < curWinner)
-                        curWinner = a.getTourCost();
+                    if (ants[i].getTourCost() < curWinner)
+                    {
+                        curWinner = ants[i].getTourCost();
+                        antIndex = i;
+                    }
                 }
             }
             return curWinner;
@@ -126,9 +157,14 @@ namespace TSP
         }
 
 
-        public void depositPheromone(Ant[] ants)
+        public void depositPheromone(Ant[] ants, double worstPath)
         {
             int[,] curPath;
+            //apply the pheromone to the best path so far.
+
+
+
+
 
             //add our pheromones from the ant's traveled paths. 
             foreach (Ant a in ants)
@@ -137,10 +173,11 @@ namespace TSP
                     continue;
 
                 curPath = a.getPath();
-                double pheromoneChange = Q / a.getTourCost();
+
+                double pheromoneChange = (worstPath - a.getTourCost()) / a.getTourCost();
                 for (int i = 0; i < matrix.getCityNumber(); i++)
                 {
-                    matrix.changePheromone(i, curPath[i, 1], pheromoneChange);
+                    matrix.setNewPheromone(i, curPath[i, 1], pheromoneChange);
                 }
             }
         }

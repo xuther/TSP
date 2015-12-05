@@ -111,16 +111,16 @@ namespace TSP
                 }
             }
 
-            
 
-            if (rand.NextDouble() <= .5)
+            double value = rand.NextDouble();
+            if (value <= .5)
             {
                 i = current;
                 
             }
             else
             {
-                double value = rand.NextDouble();
+                value = rand.NextDouble();
 
                 for (i = 0; i < problemSize; i++)
                 {
@@ -163,7 +163,7 @@ namespace TSP
                 if (eligibleCities[i] == 1 || matrix.getCost(curCity, i) == double.PositiveInfinity)
                     continue;
 
-                sum += matrix.getPheremoneByConstant(curCity,nextCity);
+                sum += matrix.getPheremoneByConstant(curCity,i);
 
             }
             double toReturn = matrix.getPheremoneByConstant(curCity,nextCity)/sum;
@@ -177,6 +177,8 @@ namespace TSP
             initAnt(startCity);
             abort = false;
             double runningSum = 0;
+            this.runningPathCost = 0;
+
             while (movesTaken < problemSize - 1 && abort == false)
             {
                 Move(runningSum);
